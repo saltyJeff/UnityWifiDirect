@@ -43,7 +43,7 @@ public class UnityWifiDirect {
         filter.addAction(WifiDirectHandler.Action.WIFI_STATE_CHANGED);
         filter.addAction(WifiDirectHandler.Action.DNS_SD_TXT_RECORD_AVAILABLE);
         filter.addAction(WifiDirectHandler.Action.DNS_SD_SERVICE_AVAILABLE);
-        LocalBroadcastManager.getInstance(unityActivity).registerReceiver(broadcastReceiver, filter);
+        unityActivity.registerReceiver(broadcastReceiver, filter);
         Log.i(TAG, "Broadcast receiver registered");
         //bind service
         Intent intent = new Intent(unityActivity, WifiDirectHandler.class);
@@ -127,7 +127,7 @@ public class UnityWifiDirect {
                         fmt.append("="+entry.getValue());
                     }
                     String result = fmt.toString();
-                    Log.i(TAG, "device found with text record, formatted xml: "+result);
+                    Log.i(TAG, "device found with text record, formatted string: "+result);
                     UnityPlayer.UnitySendMessage(gameObject, "onUglyTxtRecord", result);
                     break;
                 case WifiDirectHandler.Action.SERVICE_CONNECTED:

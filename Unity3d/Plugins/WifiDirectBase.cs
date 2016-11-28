@@ -144,6 +144,7 @@ public class WifiDirectBase : MonoBehaviour {
 			}
 			record.Add (key, value);
 		}
+		Debug.log("ugly record found");
 		onTxtRecord (addr, record);
 	}
 	/// <summary>
