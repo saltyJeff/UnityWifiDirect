@@ -79,9 +79,9 @@ public class UnityWifiDirect {
     }
     public static void sendMessage (String msg) {
         try {
-            wifiDirectHandler.getCommunicationManager().write(msg.getBytes("UTF-8"));
+            wifiDirectHandler.getCommunicationManager().write(msg.getBytes("UTF-16"));
         }
-        catch (Exception e) { //because there's gonna be that one fool who doesn't support UTF-8
+        catch (Exception e) { //because there's gonna be that one fool who doesn't support UTF-16
 
         }
     }
