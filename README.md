@@ -16,8 +16,9 @@ Will put up example later
 2. Use the build button in the Android Studio menu bar (the gradle file has been pre-configured)
 3. Go into the "app-debug.aar" file in the app/build/outputs/aar/ folder
 4. Open the aar with 7zip and delete the "res" folder
-5. Open "lib" folder in the aar and delete "unity.jar"
-6. Copy the android-support-v4.jar file from the Android SDK install location into "libs" inside the aar
-7. Copy the .aar into (your Unity3d project)/Assets/Plugins/Android and rename it "UnityWifiDirect.aar", and make sure WifiDirectBase.cs is inside Assets/Plugins
-8. Folow the instructions in the "Using the Library" section above
+5. Inside the aar delete the 'R.txt' file
+6. Open "lib" folder in the aar and delete "unity.jar"
+7. Copy the android-support-v4.jar file from the Android SDK install location into "libs" inside the aar
+8. Copy the .aar into (your Unity3d project)/Assets/Plugins/Android and rename it "UnityWifiDirect.aar", and make sure WifiDirectBase.cs is inside Assets/Plugins
+9. Folow the instructions in the "Using the Library" section above
 
