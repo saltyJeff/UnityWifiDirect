@@ -43,7 +43,7 @@ public class UnityWifiDirect {
         filter.addAction(WifiDirectHandler.Action.WIFI_STATE_CHANGED);
         filter.addAction(WifiDirectHandler.Action.DNS_SD_TXT_RECORD_AVAILABLE);
         filter.addAction(WifiDirectHandler.Action.DNS_SD_SERVICE_AVAILABLE);
-        unityActivity.registerReceiver(broadcastReceiver, filter);
+        LocalBroadcastManager.getInstance(unityActivity).registerReceiver(broadcastReceiver, filter);
         Log.i(TAG, "Broadcast receiver registered");
         //bind service
         Intent intent = new Intent(unityActivity, WifiDirectHandler.class);
