@@ -45,7 +45,7 @@ public class WifiDirectBase : MonoBehaviour {
 		{
 			foreach(KeyValuePair<string, string> kvp in record)
 			{
-				hashMap.Call ("put", kvp.Key, kvp.Value);
+				hashMap.Call<string> ("put", kvp.Key, kvp.Value);
 			}
 			wifiDirect.CallStatic ("broadcastService", service, hashMap);
 		}
