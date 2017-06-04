@@ -127,20 +127,20 @@ public class WifiDirectBase : MonoBehaviour {
 	public void onUglyTxtRecord (string uglyRecord) {
 		int addrSplitAddress = uglyRecord.IndexOf ('&');
 		string addr = uglyRecord.Substring (0, addrSplitAddress);
-		string temp = uglyRecord.Substring (addrSplitAddress);
+		string temp = uglyRecord.Substring (addrSplitAddress+1);
 		int splitIndex = temp.IndexOf ('&');
 		Dictionary<string, string> record = new Dictionary<string, string> ();
 		while (splitIndex > 0) {
 			int eqIndex = temp.IndexOf ('=');
-			string key = temp.Substring (1, eqIndex);
+			string key = temp.Substring (0, eqIndex);
 			splitIndex = temp.IndexOf ('&');
 			string value;
 			if (splitIndex < 0) {
 				value = temp.Substring (eqIndex + 1);
-
 			} 
 			else {
-				value = temp.Substring (eqIndex + 1, splitIndex);
+				value = temp.Substring (eqIndex + 1, splitIndex-eqIndex-1);
+				temp = temp.Substring (splitIndex + 1);
 			}
 			record.Add (key, value);
 		}

@@ -35,7 +35,7 @@ public class UnityWifiDirect {
         Log.i(TAG, "initializing");
         unityActivity = UnityPlayer.currentActivity;
         Log.i(TAG, unityActivity.getLocalClassName());
-        //register broadcast reciever
+        //register broadcast receiver
         IntentFilter filter = new IntentFilter();
         filter.addAction(WifiDirectHandler.Action.SERVICE_CONNECTED);
         filter.addAction(WifiDirectHandler.Action.MESSAGE_RECEIVED);
@@ -135,9 +135,11 @@ public class UnityWifiDirect {
                     UnityPlayer.UnitySendMessage(gameObject, "onConnect", "");
                     break;
                 case WifiDirectHandler.Action.MESSAGE_RECEIVED:
-                    String msg = new String(intent.getByteArrayExtra(WifiDirectHandler.MESSAGE_KEY));
-                    Log.i(TAG, "Message received: "+msg);
-                    UnityPlayer.UnitySendMessage(gameObject, "onMessage", msg);
+                    try {
+                        String msg = new String(intent.getByteArrayExtra(WifiDirectHandler.MESSAGE_KEY), "UTF-16");
+                        Log.i(TAG, "Message received: "+msg);
+                        UnityPlayer.UnitySendMessage(gameObject, "onMessage", msg);
+                    } catch (Exception e) {}
                     break;
                 default:
                     break;

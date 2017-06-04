@@ -8,6 +8,8 @@ Copy the Unity3d/Plugins folder into your Assets folder, and create a class that
 
 Look at the Unity3d/Documentation/html for Doxygen files with descriptions on what to inherit
 
+### Please note: all peers should both broadcast and search to connect
+
 ## Build Instructions
 ### Building the Android library:
 1. Directory ./Android is already a Android Studio Gradle project, just import it into Android Studio
