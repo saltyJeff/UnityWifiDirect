@@ -8,7 +8,7 @@ Copy the Unity3d/Plugins folder into your Assets folder, and create a C# class t
 
 Look at the Unity3d/Documentation/html for Doxygen files with descriptions on what to inherit
 
-An example that uses Wifi-Direct to change the color of a cube is available (here)[https://github.com/saltyJeff/WifiDirectExample]
+An example that uses Wifi-Direct to change the color of a cube is available [here](https://github.com/saltyJeff/WifiDirectExample).
 
 ### Please note: all peers should both broadcast and search to connect
 
