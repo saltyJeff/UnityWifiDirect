@@ -4,9 +4,11 @@ Adds Wifi Direct capability to Android Unity3d builds
 Provides a C# wrapper around the [Wifi-Buddy project](https://github.com/Crash-Test-Buddies/WiFi-Buddy)
 
 ## Using the library
-Copy the Unity3d/Plugins folder into your Assets folder, and create a class that inherits from WifiDirectBase.cs
+Copy the Unity3d/Plugins folder into your Assets folder, and create a C# class that inherits from WifiDirectBase.cs
 
 Look at the Unity3d/Documentation/html for Doxygen files with descriptions on what to inherit
+
+An example that uses Wifi-Direct to change the color of a cube is available [here](https://github.com/saltyJeff/WifiDirectExample).
 
 ### Please note: all peers should both broadcast and search to connect
 
