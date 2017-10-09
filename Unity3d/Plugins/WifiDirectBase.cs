@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
+using System.Text;
+using System;
 #if UNITY_ANDROID
 /// <summary>
 /// The base class of the library
@@ -125,24 +127,19 @@ public class WifiDirectBase : MonoBehaviour {
 	/// The deserialized text reocrds
 	/// </param>
 	public void onUglyTxtRecord (string uglyRecord) {
-		int addrSplitAddress = uglyRecord.IndexOf ('&');
-		string addr = uglyRecord.Substring (0, addrSplitAddress);
-		string temp = uglyRecord.Substring (addrSplitAddress+1);
-		int splitIndex = temp.IndexOf ('&');
+		int addrSplitAddress = uglyRecord.IndexOf ('_');
+		string addrEncoded = uglyRecord.Substring (0, addrSplitAddress);
+		string addr = Encoding.Unicode.GetString(Convert.FromBase64String(addrEncoded));
+		string remaining = uglyRecord.Substring (addrSplitAddress+1);
+		int splitIndex = remaining.IndexOf ('_');
 		Dictionary<string, string> record = new Dictionary<string, string> ();
-		while (splitIndex > 0) {
-			int eqIndex = temp.IndexOf ('=');
-			string key = temp.Substring (0, eqIndex);
-			splitIndex = temp.IndexOf ('&');
-			string value;
-			if (splitIndex < 0) {
-				value = temp.Substring (eqIndex + 1);
-			} 
-			else {
-				value = temp.Substring (eqIndex + 1, splitIndex-eqIndex-1);
-				temp = temp.Substring (splitIndex + 1);
-			}
-			record.Add (key, value);
+		while (splitIndex > 0 && remaining.Length > 0) {
+			int eqIndex = remaining.IndexOf ('?');
+			string key = remaining.Substring (0, eqIndex);
+			splitIndex = remaining.IndexOf ('_');
+			string value = remaining.Substring (eqIndex + 1, splitIndex-eqIndex-1);
+			remaining = remaining.Substring (splitIndex + 1);
+			record.Add (Encoding.Unicode.GetString(Convert.FromBase64String(key)), Encoding.Unicode.GetString(Convert.FromBase64String(value)));
 		}
 		Debug.Log("ugly record found");
 		this.onTxtRecord (addr, record);
@@ -163,7 +160,7 @@ public class WifiDirectBase : MonoBehaviour {
 	/// Called when connected to a client
 	/// </summary>
 	public virtual void onConnect () {
-
+		
 	}
 	/// <summary>
 	/// Called when the other device has sent a message.

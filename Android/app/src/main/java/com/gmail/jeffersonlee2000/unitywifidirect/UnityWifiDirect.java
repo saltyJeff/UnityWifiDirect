@@ -13,8 +13,13 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.util.Base64;
 
 import com.unity3d.player.*;
+
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -121,12 +126,22 @@ public class UnityWifiDirect {
                 case WifiDirectHandler.Action.DNS_SD_TXT_RECORD_AVAILABLE:
                     String txtAddress = intent.getStringExtra(WifiDirectHandler.TXT_MAP_KEY);
                     Map<String, String> recordMap = wifiDirectHandler.getDnsSdTxtRecordMap().get(txtAddress).getRecord();
-                    StringBuilder fmt = new StringBuilder(txtAddress);
-                    for(Map.Entry<String, String> entry : recordMap.entrySet()) {
-                        fmt.append("&"+entry.getKey());
-                        fmt.append("="+entry.getValue());
+                    //encode into base64
+                    /*
+                    addr_key1?val1_key2?val2_
+                    addr, keys, and values are all base64 so you can put any string through
+                     */
+                    StringBuilder encoded = new StringBuilder();
+                    try {
+                        encoded.append(Base64.encodeToString(txtAddress.getBytes("UTF-16"), Base64.DEFAULT) + "_");
+                        for(Map.Entry<String, String> entry : recordMap.entrySet()) {
+                            encoded.append(Base64.encodeToString(entry.getKey().getBytes("UTF-16"), Base64.DEFAULT) + "?");
+                            encoded.append(Base64.encodeToString(entry.getValue().getBytes("UTF-16"), Base64.DEFAULT) + "_");
+                        }
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
                     }
-                    String result = fmt.toString();
+                    String result = encoded.toString();
                     Log.i(TAG, "device found with text record, formatted string: "+result);
                     UnityPlayer.UnitySendMessage(gameObject, "onUglyTxtRecord", result);
                     break;
