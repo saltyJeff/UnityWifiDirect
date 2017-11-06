@@ -6,7 +6,7 @@ Provides a C# wrapper around the [Wifi-Buddy project](https://github.com/Crash-T
 ## Using the library
 Copy the Unity3d/Plugins folder into your Assets folder, and create a C# class that inherits from WifiDirectBase.cs
 
-Look at the Unity3d/Documentation/html for Doxygen files with descriptions on what to inherit
+Doxygen files are hosted [here](http://saltyjeff.github.io/UnityWifiDirect/html)
 
 An example that uses Wifi-Direct to change the color of a cube is available [here](https://github.com/saltyJeff/WifiDirectExample).
 
